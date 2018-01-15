@@ -34,8 +34,8 @@ Once vagrant environment is up, web application should be reachable at
 Followin URIs are available:
 
 * `/events`
- * `GET` to list events in DB
- * `POST` to push event into DB
+  * `GET` to list events in DB
+  * `POST` to push event into DB
 * `/event/<id>/` to show one particular event stored in DB
 
 ## Structure of Event

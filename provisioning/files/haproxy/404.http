@@ -1,0 +1,8 @@
+HTTP/1.0 400 Not Found
+Cache-Control: no-cache
+Connection: close
+Content-Type: text/html
+
+<html><body><h1>400 Not Found</h1>
+The requested URL was not found on this server.
+</body></html>

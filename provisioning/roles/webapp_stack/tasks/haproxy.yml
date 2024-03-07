@@ -1,29 +1,28 @@
 ---
 - name: Install and configure HAproxy
-  package:
+  ansible.builtin.package:
     name: haproxy
     state: present
 
 - name: Deploy HAproxy error 404 file
-  copy:
+  ansible.builtin.template:
     dest: /etc/haproxy/errors/404.http
-    src: files/haproxy/404.http
+    src: haproxy/404.http.j2
     owner: root
     group: root
     mode: '0644'
 
 - name: Deploy HAproxy config file
-  template:
+  ansible.builtin.template:
     dest: /etc/haproxy/haproxy.cfg
-    src: files/haproxy/haproxy.cfg.j2
+    src: haproxy/haproxy.cfg.j2
     owner: root
     group: root
     mode: '0644'
     validate: '/usr/sbin/haproxy -c -f %s'
-  notify:
-    - restart haproxy
+  notify: Restart haproxy
 
 - name: Ensure HAproxy is running
-  service:
+  ansible.builtin.service:
     name: haproxy
-    state: running
+    state: started

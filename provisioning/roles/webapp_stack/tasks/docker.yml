@@ -1,27 +1,27 @@
 ---
 - name: Build Docker images from Dockerfiles.
-  docker_image:
+  community.docker.docker_image:
+    build:
+      path: "/vagrant/provisioning/{{ item.directory }}"
     name: "{{ item.name }}"
+    push: false
     tag: "{{ item.tag }}"
-    path: "/vagrant/provisioning/{{ item.directory }}"
-    state: build
-  with_items:
-    - { name: data, tag: "data", directory: data }
-    - { name: www, tag: "webapp", directory: www }
-    - { name: db, tag: "pgsql", directory: db }
+    state: present
+    source: build
+  with_items: "{{ webapp_stack_docker_images }}"
 
 # Data containers don't need to be running to be utilized.
 - name: Run a PgSQL Data container.
-  docker:
+  community.docker.docker_container:
     image: data:data
     name: data
     state: present
 
 - name: Run a webapp container.
-  docker:
+  community.docker.docker_container:
     image: www:webapp
     name: "{{ item.name }}"
-    state: running
+    state: started
     restart_policy: always
     command: python /opt/www/index.py
     ports: "{{ item.public_port }}:3031"
@@ -31,13 +31,14 @@
       POSTGRES_USER: webapp
       POSTGRES_PASS: na9Chie9Phie6Yeepae1aech
       RUN_MIGRATIONS: "{{ item.run_migrations }}"
-  with_items: "{{ webapps }}"
+  with_items: "{{ webapp_stack_app_containers }}"
 
 - name: Run a PgSQL container.
-  docker:
+  community.docker.docker_container:
     image: db:pgsql
     name: db
-    state: running
+    state: started
+    restart_policy: always
     volumes_from:
       - data
     ports: "5432:5432"

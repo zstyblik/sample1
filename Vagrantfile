@@ -2,7 +2,8 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "debian/stretch64"
+  config.vm.box = "debian/bookworm64"
+  config.vm.define "sample1"
   config.vm.hostname = "sample1.example.com"
   config.vm.network "forwarded_port", guest: 80, host: 8080
 
@@ -15,6 +16,7 @@ Vagrant.configure("2") do |config|
     inline: "sudo apt-get update && apt-get install -y ansible"
 
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "provisioning/main.yml"
+    ansible.compatibility_mode = "2.0"
+    ansible.playbook = "provisioning/playbook.yml"
   end
 end

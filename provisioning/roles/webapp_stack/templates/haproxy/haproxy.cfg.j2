@@ -52,6 +52,6 @@ backend bk_webapp
     option httpchk GET /health
     balance roundrobin
     option allbackups
-{% for item in webapps %}
+{% for item in webapp_stack_app_containers %}
     server {{ item.name }} {{ ansible_docker0.ipv4.address }}:{{ item.public_port }} check
 {% endfor %}

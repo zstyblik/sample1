@@ -12,8 +12,8 @@ SPOF in this example.
 
 ## Dependencies
 
-* ansible=2.1.0-2
-* vagrant=2.0.1
+* ansible=7.3.0
+* vagrant=2.4.1
 
 ## How-to run/setup
 

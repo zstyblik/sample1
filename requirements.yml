@@ -1,2 +1,3 @@
 ---
-- name: angstwad.docker_ubuntu
+- name: oefenweb.docker
+  version: v2.1.46

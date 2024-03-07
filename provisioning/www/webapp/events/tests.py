@@ -1,6 +1,7 @@
 import json
 
-from django.test import Client, TestCase
+from django.test import Client
+from django.test import TestCase
 from django.urls import reverse
 
 from .models import Event

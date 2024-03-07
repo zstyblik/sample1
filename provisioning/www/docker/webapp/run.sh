@@ -4,7 +4,9 @@ set -u
 
 if [ "${RUN_MIGRATIONS}" = "yes" ]; then
     cd /srv/webapp
-    /var/tmp/webapp/bin/python3.5 manage.py migrate --no-input
+    /var/tmp/webapp/bin/python3 manage.py migrate --no-input
 fi
 
-uwsgi --ini /etc/uwsgi/apps-enabled/webapp.ini --uid www-data
+/var/tmp/webapp/bin/gunicorn \
+    -c configs/gunicorn/conf.py \
+    webapp.wsgi:application

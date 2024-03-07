@@ -1,0 +1,16 @@
+---
+- name: Configure OS
+  ansible.builtin.include_tasks:
+    file: "setup.yml"
+
+- name: Build and deploy Docker containers
+  ansible.builtin.include_tasks:
+    file: "docker.yml"
+
+- name: Configure HAproxy
+  ansible.builtin.include_tasks:
+    file: "haproxy.yml"
+
+- name: Configure iptables
+  ansible.builtin.include_tasks:
+    file: "iptables.yml"

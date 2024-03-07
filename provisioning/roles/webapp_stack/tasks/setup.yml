@@ -5,16 +5,12 @@
 # runs, the docker commands would fail if run by the vagrant user, since the
 # persisted connection state isn't aware of the addition of the 'docker' group.
 - name: Add vagrant user to docker group.
-  user:
+  ansible.builtin.user:
     name: vagrant
     groups: docker
-    append: yes
-  become: yes
+    append: true
+  become: true
 
-- name: Install Pip.
-  apt: name=python-pip state=installed
-  become: yes
-
-- name: Install Docker Python library.
-  pip: name=docker-py state=present
-  become: yes
+# Otherwise ansible_docker0 might not be available during first run.
+- name: Get the latest information about facts
+  ansible.builtin.setup:

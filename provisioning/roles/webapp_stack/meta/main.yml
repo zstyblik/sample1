@@ -1,0 +1,21 @@
+# meta file
+---
+galaxy_info:
+  author: zstyblik
+  role_name: webapp_stack
+  company: zstyblik
+  description: Set up the webapp stack
+  license: MIT License
+  min_ansible_version: 2.10.0
+  platforms:
+    - name: Ubuntu
+      versions:
+        - jammy
+    - name: Debian
+      versions:
+        - bookworm
+  galaxy_tags:
+    - testing
+dependencies: []
+collections:
+  - community.docker

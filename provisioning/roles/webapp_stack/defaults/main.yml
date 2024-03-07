@@ -1,0 +1,6 @@
+---
+webapp_stack_app_containers: []
+webapp_stack_docker_images:
+  - { name: data, tag: "data", directory: data }
+  - { name: www, tag: "webapp", directory: www }
+  - { name: db, tag: "pgsql", directory: db }

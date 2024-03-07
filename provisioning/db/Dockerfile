@@ -1,4 +1,4 @@
-FROM postgres:9.6
+FROM postgres:15.6
 MAINTAINER Nobody <nobody@example.com>
 
 ENV PGDATA=/var/lib/postgresql/data/pgdata

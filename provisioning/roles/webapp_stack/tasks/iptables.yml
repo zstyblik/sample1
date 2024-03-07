@@ -1,5 +1,6 @@
 ---
-- iptables:
+- name: DROP traffic from outside to PgSQL
+  ansible.builtin.package.iptables:
     chain: FORWARD
     action: insert
     in_interface: eth0
@@ -8,9 +9,10 @@
     destination_port: 5432
     jump: DROP
     comment: DROP traffic from outside to PgSQL
-  become: yes
+  become: true
 
-- iptables:
+- name: DROP traffic from outside to webapps running in Docker
+  ansible.builtin.package.iptables:
     chain: FORWARD
     action: insert
     in_interface: eth0
@@ -19,4 +21,4 @@
     destination_port: 8000
     jump: DROP
     comment: DROP traffic from outside to webapps running in Docker
-  become: yes
+  become: true

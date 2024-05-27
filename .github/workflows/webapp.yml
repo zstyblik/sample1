@@ -1,0 +1,28 @@
+---
+name: webapp workflow
+
+on:
+  push:
+    paths:
+    - 'provisioning/www/webapp/**'
+    - '.github/workflows/**'
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.11
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.11
+    - name: Install dependencies
+      working-directory: ./provisioning/www/webapp/
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run django tests
+      working-directory: ./provisioning/www/webapp/
+      run: |
+        python manage.py test --settings=webapp.settings.ci

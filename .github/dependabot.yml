@@ -2,7 +2,7 @@
 version: 2
 updates:
 - package-ecosystem: "pip"
-  directory: "/"
+  directory: "/provisioning/www/webapp/"
   schedule:
     interval: "weekly"
   groups:

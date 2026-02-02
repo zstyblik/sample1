@@ -1,4 +1,4 @@
 Django==5.2.10
 psycopg2==2.9.11
 
-gunicorn==24.1.1
+gunicorn==25.0.0
